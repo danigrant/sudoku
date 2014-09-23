@@ -28,14 +28,65 @@ $(document).ready(function(){
 	var sudokuGame = new Sudoku(example.initial, example.solution);
 	load(sudokuGame);
 
-
 	$('#board').on('keydown', '.sudoku-box', function(e){
 		if([8,9,37,38,39,40,48,49,50,51,52,53,54,55,56,57,13,46,96,97,98,99,100,101,102,103,104,105].indexOf(e.which) === -1){
 			e.preventDefault();
 		}
+		switch(e.which){
+			case 37: // left arrow
+				var c = $(this);
+				do {
+					c = c.prev().focus();
+				} while ((c.is(':disabled') || c.is('br')) && c.prev().length > 0)
+				break;
+			case 38: // up arrow
+				var c = $(this);
+				do {
+					var currentRow = Number(c.data('row'));
+					var currentCol = Number(c.data('col'));
+					if(currentRow === 1 && currentCol === 9){
+						return;
+					}
+					else if(currentRow === 1){
+						c = $('.sudoku-box[data-row="'+9+'"][data-col="'+(currentCol+1)+'"]').focus();
+					}
+					else {
+						c = $('.sudoku-box[data-row="'+(currentRow-1)+'"][data-col="'+currentCol+'"]').focus();
+					}
+				} while (c.is(':disabled'))
+				break;
+			case 39: // right arrow
+				var c = $(this);
+				do {
+					c = c.next().focus();
+				} while ((c.is(':disabled') || c.is('br')) && c.next().length > 0)
+				break;
+			case 40: // down arrow
+				var c = $(this);
+				do {
+					var currentRow = Number(c.data('row'));
+					var currentCol = Number(c.data('col'));
+					if(currentRow === 9 && currentCol === 1){
+						return;
+					}
+					else if(currentRow === 9){
+						c = $('.sudoku-box[data-row="'+1+'"][data-col="'+(currentCol-1)+'"]').focus();
+					}
+					else {
+						c = $('.sudoku-box[data-row="'+(currentRow+1)+'"][data-col="'+currentCol+'"]').focus();
+					}
+				} while (c.is(':disabled'))
+				break;
+		}
+	});
+	$('#board').on('keyup', '.sudoku-box', function(e){
+		$(this).select();
 	});
 	$('#board').on('focus', '.sudoku-box', function(e){
 		$(this).select();
+	});
+	$('#board').on('mouseup', '.sudoku-box', function(e){
+		e.preventDefault();
 	});
 });
 
@@ -76,10 +127,10 @@ function validCharacter(c){
 
 
 function load(sudokuGame) {
-	sudokuGame.board.forEach(function(currentRow) {
-		currentRow.forEach(function(currentEl) {
+	sudokuGame.board.forEach(function(currentRow, rowIndex) { // rowIndex is 0 indexed
+		currentRow.forEach(function(currentEl, colIndex) { // colIndex is 0 indexed
 			console.log(currentEl);
-			$('#board').append('<input class="sudoku-box" type="text" min="0" max="9" maxlength="1" value="'+ currentEl["value"]+'" '+ (currentEl.mutable ? "": "disabled") +'>');
+			$('#board').append('<input class="sudoku-box" data-row="'+(rowIndex+1)+'" data-col="'+(colIndex+1)+'" type="text" min="0" max="9" maxlength="1" value="'+ currentEl["value"]+'" '+ (currentEl.mutable ? "": "disabled") +'>');
 			// Input type number doesn't support maxlength
 		});
 		$('#board').append('<br />');
