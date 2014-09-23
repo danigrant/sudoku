@@ -28,9 +28,14 @@ $(document).ready(function(){
 	var sudokuGame = new Sudoku(example.initial, example.solution);
 	load(sudokuGame);
 
+	var autoValidate = false;
+
 	$('#board').on('keydown', '.sudoku-box', function(e){
 		if([8,9,37,38,39,40,48,49,50,51,52,53,54,55,56,57,13,46,96,97,98,99,100,101,102,103,104,105].indexOf(e.which) === -1){
 			e.preventDefault();
+		} 
+		else {
+			if (autoValidate) validateBoard();
 		}
 		switch(e.which){
 			case 37: // left arrow
@@ -88,6 +93,32 @@ $(document).ready(function(){
 	$('#board').on('mouseup', '.sudoku-box', function(e){
 		e.preventDefault();
 	});
+	$('#toggle-validation').change(function() {
+		autoValidate = $(this).prop('checked');
+		if (autoValidate) validateBoard();
+	});
+	function validateBoard() {
+		$('.valid').removeClass('valid');
+		$('.invalid').removeClass('invalid');
+		sudokuGame.board.forEach(function(currentRow, rowIndex) { // rowIndex is 0 indexed
+			currentRow.forEach(function(currentEl, colIndex) { // colIndex is 0 indexed
+				console.log(currentEl);
+
+				var currentBox = $('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]');
+				if(currentBox.val() === "") { 
+					//empty string
+				} 
+				else if(currentEl.solution === Number(currentBox.val())) {
+					currentBox.addClass('valid');
+				}
+				else {
+					console.log(currentBox.val());
+					console.log(currentBox.solution);
+					currentBox.addClass('invalid');
+				}
+			});
+		})
+	}
 });
 
 var Sudoku = (function(initial, solution){
@@ -109,7 +140,7 @@ var Sudoku = (function(initial, solution){
 				tempRow.push({
 					value: currentInitialEl == "-" ? "" : currentInitialEl,
 					mutable: currentInitialEl == "-",
-					solution: this.solution[i-1][j-1]
+					solution: Number(this.solution[i-1][j-1])
 				});
 			}
 			tempRay.push(tempRow);
@@ -136,3 +167,4 @@ function load(sudokuGame) {
 		$('#board').append('<br />');
 	})
 }
+
