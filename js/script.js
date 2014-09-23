@@ -29,10 +29,13 @@ $(document).ready(function(){
 	load(sudokuGame);
 
 
-	$('#board').on('keydown', 'input[type="text"]', function(e){
+	$('#board').on('keydown', '.sudoku-box', function(e){
 		if([8,9,37,38,39,40,48,49,50,51,52,53,54,55,56,57,13,46,96,97,98,99,100,101,102,103,104,105].indexOf(e.which) === -1){
 			e.preventDefault();
 		}
+	});
+	$('#board').on('focus', '.sudoku-box', function(e){
+		$(this).select();
 	});
 });
 
@@ -76,7 +79,7 @@ function load(sudokuGame) {
 	sudokuGame.board.forEach(function(currentRow) {
 		currentRow.forEach(function(currentEl) {
 			console.log(currentEl);
-			$('#board').append('<input type="text" min="0" max="9" maxlength="1" value="'+ currentEl["value"]+'" '+ (currentEl.mutable ? "": "disabled") +'>');
+			$('#board').append('<input class="sudoku-box" type="text" min="0" max="9" maxlength="1" value="'+ currentEl["value"]+'" '+ (currentEl.mutable ? "": "disabled") +'>');
 			// Input type number doesn't support maxlength
 		});
 		$('#board').append('<br />');

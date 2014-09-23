@@ -1,0 +1,26 @@
+@box-size: 50px;
+
+.border {
+	border: 1px solid #aaa;
+}
+
+.sudoku-box {
+	width: @box-size;
+	height: @box-size;
+	font-size: 24px;
+	box-sizing: border-box;
+	text-align: center;
+	vertical-align: middle;
+	color: #777;
+	outline: none;
+	.border;
+}
+
+#board {
+	.border;
+	display: inline-block;
+}
+
+.sudoku-box:disabled {
+	color: black;
+}
