@@ -165,6 +165,21 @@ $(document).ready(function(){
 		return $($('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]:not(:disabled)')[0]);
 	}
 
+	//event handlers for animations
+	$('#toggle').mouseenter(function() {
+		console.log("mouse enter toggle");
+		$('#toggle').addClass('floating');
+	}).mouseleave(function() {
+		$('#toggle').removeClass('floating');
+	});
+
+	$('#submit').mouseenter(function() {
+		console.log("mouse enter submit");
+		$('#submit').addClass('floating');
+	}).mouseleave(function() {
+		$('#submit').removeClass('floating');
+	});
+
 });
 
 //Sudoku constructor takes the initial setting of the board && the board's solution 

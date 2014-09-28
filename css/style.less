@@ -6,6 +6,7 @@
 @header-color: #fff;
 
 body, html {
+	width: 100%;
 	margin: 0;
 	padding: 0;
 	font-family: 'Ubuntu', sans-serif;
@@ -97,82 +98,43 @@ input[type=checkbox] {
 }
 
 #toggle {
-	width: 70px;
-	height: 40px;
-	background: #333;
-	display: inline-block;
-
-	/*border-radius: 2px;*/
-	position: relative;
-
 	-webkit-transition: all .5s ease;
 	-moz-transition: all .5s ease;
 	-o-transition: all .5s ease;
 	-ms-transition: all .5s ease;
 	transition: all .5s ease;
+}
+
+#toggle-validation {
+	position: absolute;
+	top: -100px;
 }
 
 #toggle:hover label {
-	width: 30px;
-	height: 30px;
 }
 
 #toggle:hover {
-	width: 71px;
-	height: 41px;
 }
 
 #toggle label {
-	display: block;
-	width: 28px;
-	height: 28px;
-	/*border-radius: 20%;*/
+}
 
-	-webkit-transition: all .5s ease;
-	-moz-transition: all .5s ease;
-	-o-transition: all .5s ease;
-	-ms-transition: all .5s ease;
-	transition: all .5s ease;
-	cursor: pointer;
-	position: absolute;
-	top: 6.5px;
-	z-index: 1;
-	left: 6px;
-	background: @red;
+/*animation on validate button*/
 
-	/*text properties*/
-	text-align: center;
-	font-size: 1.4em;
-	color: #fff;
+#toggle input[type="checkbox"]:hover + label {
 }
 
 #toggle input[type="checkbox"]:checked + label {
-	left: 36px;
-	background: @green;
+
 }
 
 #auto-validate-label {
-	display: inline-block;
-	position: relative;
-	top: 14px;
-	right: 14px;
 }
 
 #submit-label {
-	position: relative;
-	display: inline-block;
-	left: 14px;
 }
 
 #submit {
-	display: inline-block;
-	position: relative;
-	top: 30px;
-	left: 94px;
-	width: 70px;
-	height: 40px;
-	background: @red;
-	border: none;
 
 	-webkit-transition: all .2s ease;
 	-moz-transition: all .2s ease;
@@ -182,39 +144,33 @@ input[type=checkbox] {
 }
 
 #submit:hover {
-	background: @green;
-	width: 72px;
-	height: 42px;
 }
 
 #submit:focus {
-	outline: none;
 }
 
 #submit:active {
-	top: 28px;
-	background: #F89406;
 }
 
 /* borders for 3x3 blocks */
 
 .border-top {
-	border-top: 2px solid black;
+	border-top: 2px solid rgba(0,0,0,0.6);
 }
 
 .border-bottom {
-	border-bottom: 2px solid black;
+	border-bottom: 2px solid rgba(0,0,0,0.6);
 }
 
 .border-right {
-	border-right: 2px solid black;
+	border-right: 2px solid rgba(0,0,0,0.6);
 }
 
 .border-left {
-	border-left: 2px solid black;
+	border-left: 2px solid rgba(0,0,0,0.6);
 }
 
-#options {
+.options {
 	text-align: center;
 }
 
@@ -226,8 +182,165 @@ input[type=checkbox] {
 	margin-right: 20px;
 	margin-top: 10px;
 	font-size: 13px;
+	border: none;
 }
 
 .option2 {
 	display: inline-block;
+}
+
+
+/* trial animations */
+
+#testDiv {
+	width: 200px;
+	height: 100px;
+	background: @red;
+}
+
+.stretchRight{
+
+	visibility: visible;
+
+	animation-name: stretchRight;
+	-webkit-animation-name: stretchRight;	
+
+	animation-duration: 1.5s;	
+	-webkit-animation-duration: 1.5s;
+
+	animation-timing-function: ease-out;	
+	-webkit-animation-timing-function: ease-out;	
+
+	transform-origin: 0% 0%;
+	-ms-transform-origin: 0% 0%;
+	-webkit-transform-origin: 0% 0%; 		
+}
+
+@keyframes stretchRight {
+	0% {
+		transform: scaleX(0.3);
+	}
+	40% {
+		transform: scaleX(1.02);
+	}
+	60% {
+		transform: scaleX(0.98);
+	}
+	80% {
+		transform: scaleX(1.01);
+	}
+	100% {
+		transform: scaleX(0.98);
+	}				
+	80% {
+		transform: scaleX(1.01);
+	}
+	100% {
+		transform: scaleX(1);
+	}							
+}
+
+@-webkit-keyframes stretchRight {
+	0% {
+		-webkit-transform: scaleX(0.3);
+	}
+	40% {
+		-webkit-transform: scaleX(1.02);
+	}
+	60% {
+		-webkit-transform: scaleX(0.98);
+	}
+	80% {
+		-webkit-transform: scaleX(1.01);
+	}
+	100% {
+		-webkit-transform: scaleX(0.98);
+	}				
+	80% {
+		-webkit-transform: scaleX(1.01);
+	}
+	100% {
+		-webkit-transform: scaleX(1);
+	}		
+}
+
+.floating{
+	animation-name: floating;
+	-webkit-animation-name: floating;
+
+	animation-duration: 1.5s;	
+	-webkit-animation-duration: 1.5s;
+
+	animation-iteration-count: infinite;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@keyframes floating {
+	0% {
+		transform: translateY(0%);	
+	}
+	50% {
+		transform: translateY(8%);	
+	}	
+	100% {
+		transform: translateY(0%);
+	}			
+}
+
+@-webkit-keyframes floating {
+	0% {
+		-webkit-transform: translateY(0%);	
+	}
+	50% {
+		-webkit-transform: translateY(8%);	
+	}	
+	100% {
+		-webkit-transform: translateY(0%);
+	}			
+}
+
+@media (max-width: 600px) and (min-width: 400px) {
+	.sudoku-box {
+		width: 40px;
+		height: 40px;
+	}
+}
+
+@media (max-width: 400px) {
+	.sudoku-box {
+		width: 35px;
+		height: 35px;
+	}
+
+	.option1 {
+		padding: 0px;
+	}
+}
+
+@media (max-width: 320px) {
+	.sudoku-box {
+		width: 25px;
+		height: 25px;
+		font-size: 1em;
+	}
+}
+
+@media (max-width: 230px) {
+	.sudoku-box {
+		width: 15px;
+		height: 15px;
+		font-size: 0.6em;
+	}
+
+	.option1 {
+		margin: 0;
+	}
+}
+
+@media (max-width: 160px) {
+	.sudoku-box {
+		width: 10px;
+		height: 10px;
+		font-size: 0.1em;
+	}
 }

@@ -1,5 +1,9 @@
 <! DOCTYPE html>
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
+	<meta name="apple-mobile-web-app-capable" content="yes"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+
 	<script type="text/javascript" src="js/lib/handlebars-v2.0.0.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	<link rel="stylesheet/less" type="text/css" href="css/style.less"/>
@@ -12,21 +16,13 @@
 	<header>
 		<h1>SUDOKU</h1>
 	</header>
-<!-- 	<div id="menu-items">
-		<div id="auto-validate-option">
-			<p id="auto-validate-label">Auto-Validate</p>
-			<div id="toggle">
-				<input id="toggle-validation" type="checkbox">
-				<label for="toggle-validation">|||</label>
-			</div>
-		</div>
-		<p id="submit-label">Submit</p>
-		<button id="submit"><svg id="monkey" src="images/monkey.svg"/></button>
-	</div> -->
 	<div id="board"></div>
-	<div id="options">
-		<div class="option1">validate</div>
+	<div class="options">
+		<div class="option1" id="toggle">
+			<input id="toggle-validation" type="checkbox">
+			<label for="toggle-validation">VALIDATE</label>
+		</div>
 		<div class="option1">|</div>
-		<div class="option1">submit</div>
+		<button class="option1" id="submit">SUBMIT</button>
 	</div>
 </body>
