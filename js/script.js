@@ -139,24 +139,23 @@ $(document).ready(function(){
 	function validateBoard() {
 		//check for each box that value matches solution
 		var validGame = true;
-		autoValidate = true;
 		validateBox(); //doesn't check for empty strings
 
 		//if there are blank elems, it's a false board
-		$('input')
-			.filter(function(i) {
-			    return $(this).val() === "";
-			})
-		    .addClass('invalid');
+		$('input').filter(function(i) { return $(this).val() === ""; }).addClass('invalid');
 
 		//if there are elems with invalid class, then the board is invalid
 		if ($('.invalid').length > 0) {
 			validGame = false;
 		} 
 
-		$('.valid').removeClass('valid');
-		$('.invalid').removeClass('invalid');
-		autoValidate = false;
+		//cleanup. remove invalid class from blank boxes. and remove invalid + valid classes if autovalidate is turned off
+		$('input').filter(function(i) { return $(this).val() === ""; }).removeClass('invalid');
+		if(!autoValidate) {
+			$('.valid').removeClass('valid');
+			$('.invalid').removeClass('invalid');
+		}
+		
 		alert(validGame);
 		return validGame;
 	}

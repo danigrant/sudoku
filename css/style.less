@@ -1,13 +1,16 @@
-@box-size: 60px;
+@box-size: 57px;
 /*width > height ? height/10: width/10;*/
 @green: #A3E8C0;
 @red: #F5A99E;
+@background-color: #fff;
+@header-color: #fff;
 
 body, html {
 	margin: 0;
 	padding: 0;
 	font-family: 'Ubuntu', sans-serif;
 	text-transform: uppercase;
+	background: @background-color;
 }
 
 .border {
@@ -17,18 +20,20 @@ body, html {
 header {
 	width: 100%;
 	height: 70px;
-	-webkit-box-shadow: 0px 10px 60px 0px rgba(211,211,211,0.29);
+	/*-webkit-box-shadow: 0px 10px 60px 0px rgba(211,211,211,0.29);
 	-moz-box-shadow: 0px 10px 60px 0px rgba(211,211,211,0.29);
-	box-shadow: 0px 10px 60px 0px rgba(211,211,211,0.29);
-	border-bottom: 1px solid rgba(111,111,111,0.09);
+	box-shadow: 0px 10px 60px 0px rgba(211,211,211,0.29);*/
+	border-bottom: 1px solid rgba(111,111,111,0.22);
 	margin-bottom: 10px;
+	background: @header-color;
 }
 
 h1 {
 	display: inline-block;
 	position: relative;
-	left: 10px;
-	bottom: 10px;
+	bottom: 4px;
+	float: right;
+	right: 30px;
 }
 
 .sudoku-box {
@@ -43,9 +48,13 @@ h1 {
 	.border;
 }
 
+input {
+	background: @background-color;
+}
+
 #board {
 	.border;
-	margin: 0 auto;
+	margin: 27 auto 0;
 	display: table;
 	text-align: center;
 }
@@ -72,8 +81,9 @@ h1 {
 	display: inline-block;
 	position: absolute;
 	border: 1px solid rgba(111,111,111,0.09);
-	background: #fff;
+	background: @header-color;
 	top: 80px;
+	left: 20px;
 }
 
 input[type=checkbox] {
@@ -202,4 +212,22 @@ input[type=checkbox] {
 
 .border-left {
 	border-left: 2px solid black;
+}
+
+#options {
+	text-align: center;
+}
+
+.option1 {
+	display: inline-block;
+	padding: 20px;
+	background-color: @header-color;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 10px;
+	font-size: 13px;
+}
+
+.option2 {
+	display: inline-block;
 }
