@@ -1,3 +1,5 @@
+//TODO - make the select select the whole board, not just the inputted val
+
 //example board
 var example = {
 	initial: [
@@ -117,6 +119,7 @@ $(document).ready(function(){
 				var currentBox = getCurrentBox(rowIndex, colIndex);
 				currentBox.removeClass('valid');
 				currentBox.removeClass('invalid');
+				
 				if(currentBox.val() === "") { 
 					//TODO replace empty string
 					//empty string
@@ -136,33 +139,33 @@ $(document).ready(function(){
 	function validateBoard() {
 		//check for each box that value matches solution
 		var validGame = true;
-		sudokuGame.board.forEach(function(currentRow, rowIndex) { // rowIndex is 0 indexed
-			currentRow.forEach(function(currentEl, colIndex) {
-				currentBox = getCurrentBox(rowIndex, colIndex);
-				
-				if(currentBox.prop('enabled')) {
-					console.log("this is the value : " + currentBox.val());
-					console.log("this is the solution : " + currentEl.solution);
-					if (currentBox.val() == currentEl.solution) {
-						//woot
-					}
-					else {
-						//this elem is false
-						currentBox.addClass('invalid');
-						console.log("returning false. invalid.")
-						validGame = false;
-					}
-				}
+		autoValidate = true;
+		validateBox(); //doesn't check for empty strings
+
+		//if there are blank elems, it's a false board
+		$('input')
+			.filter(function(i) {
+			    return $(this).val() === "";
 			})
-		})
-		console.log(validGame);
+		    .addClass('invalid');
+
+		//if there are elems with invalid class, then the board is invalid
+		if ($('.invalid').length > 0) {
+			validGame = false;
+		} 
+
+		$('.valid').removeClass('valid');
+		$('.invalid').removeClass('invalid');
+		autoValidate = false;
+		alert(validGame);
 		return validGame;
 	}
 
 	//convert from obj model to the corresponding DOM elem
 	function getCurrentBox(rowIndex, colIndex) {
-		return currentBox = $('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]:not(.sudoku-box:disabled)');
+		return $($('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]:not(:disabled)')[0]);
 	}
+
 });
 
 //Sudoku constructor takes the initial setting of the board && the board's solution 
@@ -184,6 +187,7 @@ var Sudoku = (function(initial, solution){
 					console.error('Input character at ('+i-1+','+j-1+') is not recognized. Accepted characters are {-,1,2,3,4,5,6,7,8,9}');
 					throw new Error("invalid characters");
 				}
+
 				tempRow.push({
 					value: currentInitialEl == "-" ? "" : currentInitialEl,
 					mutable: currentInitialEl == "-",
@@ -210,6 +214,28 @@ function load(sudokuGame) {
 		currentRow.forEach(function(currentEl, colIndex) { // colIndex is 0 indexed
 			$('#board').append('<input class="sudoku-box" data-row="'+(rowIndex+1)+'" data-col="'+(colIndex+1)+'" type="text" min="0" max="9" maxlength="1" value="'+ currentEl["value"]+'" '+ (currentEl.mutable ? "": "disabled") +'>');
 			// Input type 'number' doesn't support maxlength. Thus, input type 'text'
+
+			//create borders for internal sudoku 3x3 blocks
+			if((rowIndex+1) % 3 == 0) {
+				$('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]').addClass('border-bottom');
+			}
+
+			if ((colIndex+1) % 3 == 0) {
+				$('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]').addClass('border-right');
+			}
+
+			//create border for external sudoku blocks
+
+			if ((rowIndex + 1) == 1) {
+				$('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]').addClass('border-top');
+			}
+
+			if ((colIndex+1) == 1) {
+				$('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]').addClass('border-left');
+			}
+
+
+
 		});
 		$('#board').append('<br />');
 	})
