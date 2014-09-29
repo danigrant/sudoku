@@ -1,10 +1,10 @@
 # Super user do ku.
 
-<a href="http://danigrant.github.io/sudoku/" target="_blank">http://danigrant.github.io/sudoku</a>
+http://danigrant.github.io/sudoku
+Solution: http://bit.ly/sudoku-solution
 
 ## The Stack
 Sudoku is built with LESS/CSS/JS/JQuery.
-The solution to this sudoku is here: http://bit.ly/sudoku-solution
 
 ## Exception Handling
 
