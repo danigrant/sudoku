@@ -1,5 +1,3 @@
-![Sudoku Screenshot On Safari](/screenshots/sudoku-safari-screenshot.png)
-
 # Super user do ku.
 
 http://danigrant.github.io/sudoku/
