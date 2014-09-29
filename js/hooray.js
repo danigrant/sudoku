@@ -24,6 +24,10 @@ function hooray() {
 		$('.back').fadeTo(25, 0);
 		$('.congrats').fadeTo(50, 0);
 
+		//reset the board
+		$('input').each(function() { if($(this).prop("disabled")) {} else { $(this).val(" "); }});
+
+
 		//fade in the board
 		$('input').each(function() {
 			$(this).fadeTo(5000*Math.random(),1);
