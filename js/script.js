@@ -1,5 +1,3 @@
-//TODO - make the select select the whole board, not just the inputted val
-
 //example board
 var example = {
 	initial: [
@@ -95,16 +93,17 @@ $(document).ready(function(){
 		$(this).select();
 	});
 
+	//automatically selects a box when the user clicks on it
 	$('#board').on('focus', '.sudoku-box', function(e){
 		$(this).select();
 	});
+
 	$('#board').on('mouseup', '.sudoku-box', function(e){
 		e.preventDefault();
 	});
 	
-	//when the validate button is pressed, if it is now checked, validate the board
+	//when the validate button is pressed, validate the board
 	$('#valid').click(function () {
-		console.log(autoValidate);
 		autoValidate = !autoValidate;
 		if (autoValidate) validateBox();
 		else {
@@ -116,14 +115,12 @@ $(document).ready(function(){
 	function validateBox() {
 		sudokuGame.board.forEach(function(currentRow, rowIndex) { // rowIndex is 0 indexed
 			currentRow.forEach(function(currentEl, colIndex) { // colIndex is 0 indexed
-				//wrap the next logic in if the box is not a preset (i.e. can be validated)
 				var currentBox = getCurrentBox(rowIndex, colIndex);
 				currentBox.removeClass('valid');
 				currentBox.removeClass('invalid');
 				
 				if(currentBox.val() === "") { 
-					//TODO replace empty string
-					//empty string
+					//empty string, nothing to validate
 				} 
 				else if(currentEl.solution === Number(currentBox.val())) {
 					currentBox.addClass('valid');
@@ -138,9 +135,9 @@ $(document).ready(function(){
 	$('#submit').click(validateBoard);
 
 	function validateBoard() {
-		//check for each box that value matches solution
+		//boolean will turn false if any box has a value that does not match its solution
 		var validGame = true;
-		validateBox(); //doesn't check for empty strings
+		validateBox(); //validateBox() doesn't mark empty strings as invalid
 
 		//if there are blank elems, it's a false board
 		$('input').filter(function(i) { return $(this).val() === ""; }).addClass('invalid');
@@ -150,13 +147,16 @@ $(document).ready(function(){
 			validGame = false;
 		} 
 
-		//cleanup. remove invalid class from blank boxes. and remove invalid + valid classes if autovalidate is turned off
+		//clean up. remove invalid class from blank boxes
+		//if autovalidate is turned off, also remove invalid + valid classes
 		$('input').filter(function(i) { return $(this).val() === ""; }).removeClass('invalid');
 		if(!autoValidate) {
 			$('.valid').removeClass('valid');
 			$('.invalid').removeClass('invalid');
 		}
 		
+		//if the game is won - celebrate
+		//otherwise, let the user know the board is incorrect
 		if (validGame) {
 			hooray();
 		}
@@ -168,20 +168,12 @@ $(document).ready(function(){
 		setTimeout(function(){
 			$('.shake').removeClass('shake');
 		}, 500);
-		return validGame;
 	}
 
-	//convert from obj model to the corresponding DOM elem
+	//converts from obj model to the corresponding DOM elem
 	function getCurrentBox(rowIndex, colIndex) {
 		return $($('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]:not(:disabled)')[0]);
 	}
-
-	//on valid completion of game
-
-	function hooray() {
-		explode();
-	}
-
 });
 
 //Sudoku constructor takes the initial setting of the board && the board's solution 
@@ -199,6 +191,8 @@ var Sudoku = (function(initial, solution){
 			var tempRow = [];
 			for(var j = 1; j < 10; j++){
 				var currentInitialEl = this.initial[i-1][j-1];
+				
+				//checks for invalid initial settings
 				if(!validCharacter(currentInitialEl)) {
 					console.error('Input character at ('+i-1+','+j-1+') is not recognized. Accepted characters are {-,1,2,3,4,5,6,7,8,9}');
 					throw new Error("invalid characters");
@@ -218,7 +212,7 @@ var Sudoku = (function(initial, solution){
 	return Sudoku;
 })();
 
-//a char is valid if it is '-' (indicates an empty square), an integer, and between 1 and 9 
+//a char is valid if it is '-' (indicates an empty square), or an integer between 1 and 9 
 function validCharacter(c){
 	var cToNum = Number(c);
 	return c === "-" || ( cToNum % 1 === 0 && 1<= cToNum && cToNum <= 9)
@@ -229,7 +223,7 @@ function load(sudokuGame) {
 	sudokuGame.board.forEach(function(currentRow, rowIndex) { // rowIndex is 0 indexed
 		currentRow.forEach(function(currentEl, colIndex) { // colIndex is 0 indexed
 			$('#board').append('<input class="sudoku-box" data-row="'+(rowIndex+1)+'" data-col="'+(colIndex+1)+'" type="text" min="0" max="9" maxlength="1" value="'+ currentEl["value"]+'" '+ (currentEl.mutable ? "": "disabled") +'>');
-			// Input type 'number' doesn't support maxlength. Thus, input type 'text'
+			// Input type 'number' doesn't support maxlength. Using input type 'text' instead
 
 			//create borders for internal sudoku 3x3 blocks
 			if((rowIndex+1) % 3 == 0) {
@@ -240,8 +234,7 @@ function load(sudokuGame) {
 				$('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]').addClass('border-right');
 			}
 
-			//create border for external sudoku blocks
-
+			//create border for external sudoku perimeter
 			if ((rowIndex + 1) == 1) {
 				$('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]').addClass('border-top');
 			}

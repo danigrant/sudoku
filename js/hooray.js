@@ -1,7 +1,7 @@
-function explode() {
-	console.log("fading out");
+//called upon correct completion of board
+function hooray() {
 	//fade out the buttons
-	$('.option1').each(function() {
+	$('.button').each(function() {
 		$(this).fadeTo(2000*Math.random(),0);
 	});
 
@@ -30,7 +30,7 @@ function explode() {
 		});
 
 		//fade in the buttons
-		$('.option1').each(function() {
+		$('.button').each(function() {
 			$(this).fadeTo(2000*Math.random(),1);
 		});
 
