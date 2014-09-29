@@ -60,6 +60,8 @@ h1 {
 	color: #2D3E51;
 	outline: none;
 	border: 1px solid @border-color;
+	box-shadow: none;
+	-webkit-appearance: none;
 }
 
 .sudoku-box:focus,
@@ -67,19 +69,21 @@ h1 {
 	outline: none;
 }
 
+.sudoku-box:disabled {
+	color: #4FA2E4;
+	opacity: 1;
+}
+
 .container {
 	margin: 0 auto;
 	display: table;
+	width: 720px;
 }
 
 #board {
 	margin: 27 auto 0;
 	text-align: center;
 	float: left;
-}
-
-.sudoku-box:disabled {
-	color: #4FA2E4;
 }
 
 .valid {
