@@ -7,6 +7,24 @@
 @border-color: #f0f0f0;
 @button-color: #484A4F;
 
+/* mixins */
+
+.transformable(@time: 0.4s) {
+	-webkit-transition: all @time ease;
+	-moz-transition: all @time ease;
+	-o-transition: all @time ease;
+	-ms-transition: all @time ease;
+	transition: all @time ease;
+}
+
+.border-radius(@radius: 5px) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+
+/* DOM styling */
+
 body, html {
 	width: 100%;
 	margin: 0;
@@ -119,15 +137,8 @@ input[type=checkbox] {
 	margin-top: 10px;
 	font-size: 13px;
 
-	-webkit-transition: all 0.4s ease;
-	-moz-transition: all 0.4s ease;
-	-o-transition: all 0.4s ease;
-	-ms-transition: all 0.4s ease;
-	transition: all 0.4s ease;
-
-	-webkit-border-radius: 1px;
-	-moz-border-radius: 1px;
-	border-radius: 1px;
+	.transformable(0.4s);
+	.border-radius(1px);
 }
 
 .button:active {
@@ -141,8 +152,8 @@ input[type=checkbox] {
 
 .cf:before,
 .cf:after {
-    content: " "; /* 1 */
-    display: table; /* 2 */
+    content: " "; 
+    display: table; 
 }
 
 .cf:after {
@@ -173,25 +184,16 @@ input[type=checkbox] {
 	font-size: 1em;
 	left: 50%;
 	background: transparent;
-
-	-webkit-transition: all 0.5s ease;
-	-moz-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
-	-ms-transition: all 0.5s ease;
-	transition: all 0.5s ease;
-
-	-webkit-border-radius: 50%;
-	-moz-border-radius: 50%;
-	border-radius: 50%;
-
+	.transformable(0.5s);
+	.border-radius(50%);
 }
 
 .back:hover {
 	background: black;
 	color: white;
 
-	-ms-transform: rotate(360deg); /* IE 9 */
-    -webkit-transform: rotate(360deg); /* Chrome, Safari, Opera */
+	-ms-transform: rotate(360deg); 
+    -webkit-transform: rotate(360deg); 
     transform: rotate(360deg);
 }
 
