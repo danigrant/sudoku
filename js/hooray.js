@@ -26,7 +26,8 @@ function hooray() {
 
 		//reset the board
 		$('input').each(function() { if($(this).prop("disabled")) {} else { $(this).val(" "); }});
-
+		$('.valid').removeClass('valid');
+		$('.invalid').removeClass('invalid');
 
 		//fade in the board
 		$('input').each(function() {
