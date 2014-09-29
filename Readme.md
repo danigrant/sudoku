@@ -1,7 +1,7 @@
 # Super user do ku.
 
-The sudoku: http://danigrant.github.io/sudoku <br />
-The solution: http://bit.ly/sudoku-solution
+http://danigrant.github.io/sudoku <br />
+(solution: http://bit.ly/sudoku-solution)
 
 ## The Stack
 Sudoku is built with LESS/CSS/JS/JQuery.
