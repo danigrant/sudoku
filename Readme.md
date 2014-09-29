@@ -4,6 +4,7 @@
 
 ## The Stack
 Sudoku is built with LESS/CSS/JS/JQuery.
+The solution to this sudoku is here: http://bit.ly/sudoku-solution
 
 ## Exception Handling
 
