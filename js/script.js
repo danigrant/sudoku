@@ -157,7 +157,9 @@ $(document).ready(function(){
 			$('.invalid').removeClass('invalid');
 		}
 		
-		alert(validGame);
+		if (validGame) {
+			hooray();
+		}
 		return validGame;
 	}
 
@@ -166,20 +168,11 @@ $(document).ready(function(){
 		return $($('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]:not(:disabled)')[0]);
 	}
 
-	// //event handlers for animations
-	// $('#toggle').mouseenter(function() {
-	// 	console.log("mouse enter toggle");
-	// 	$('#toggle').addClass('floating');
-	// }).mouseleave(function() {
-	// 	$('#toggle').removeClass('floating');
-	// });
+	//on valid completion of game
 
-	// $('#submit').mouseenter(function() {
-	// 	console.log("mouse enter submit");
-	// 	$('#submit').addClass('floating');
-	// }).mouseleave(function() {
-	// 	$('#submit').removeClass('floating');
-	// });
+	function hooray() {
+		explode();
+	}
 
 });
 
