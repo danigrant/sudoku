@@ -4,6 +4,7 @@
 @red: #F5A99E;
 @background-color: #fff;
 @header-color: #fff;
+@button-color: #484A4F;
 
 body, html {
 	width: 100%;
@@ -53,11 +54,18 @@ input {
 	background: @background-color;
 }
 
+section {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
 #board {
-	.border;
 	margin: 27 auto 0;
 	display: table;
 	text-align: center;
+	width: 70%;
+	float: left;
 }
 
 .sudoku-box:disabled {
@@ -97,60 +105,6 @@ input[type=checkbox] {
 	left: 30px;
 }
 
-#toggle {
-	-webkit-transition: all .5s ease;
-	-moz-transition: all .5s ease;
-	-o-transition: all .5s ease;
-	-ms-transition: all .5s ease;
-	transition: all .5s ease;
-}
-
-#toggle-validation {
-	position: absolute;
-	top: -100px;
-}
-
-#toggle:hover label {
-}
-
-#toggle:hover {
-}
-
-#toggle label {
-}
-
-/*animation on validate button*/
-
-#toggle input[type="checkbox"]:hover + label {
-}
-
-#toggle input[type="checkbox"]:checked + label {
-
-}
-
-#auto-validate-label {
-}
-
-#submit-label {
-}
-
-#submit {
-
-	-webkit-transition: all .2s ease;
-	-moz-transition: all .2s ease;
-	-o-transition: all .2s ease;
-	-ms-transition: all .2s ease;
-	transition: all .2s ease;
-}
-
-#submit:hover {
-}
-
-#submit:focus {
-}
-
-#submit:active {
-}
 
 /* borders for 3x3 blocks */
 
@@ -172,17 +126,46 @@ input[type=checkbox] {
 
 .options {
 	text-align: center;
+	display: inline-block;
+	width: 180px;
+	padding-top: 20px;
 }
 
 .option1 {
 	display: inline-block;
 	padding: 20px;
-	background-color: @header-color;
 	margin-left: 20px;
 	margin-right: 20px;
 	margin-top: 10px;
 	font-size: 13px;
 	border: none;
+}
+
+.button {
+	width: 160px;
+	height: 70px;
+	background: transparent;
+	border: 2px solid @button-color;	
+	outline: none;
+
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	-ms-transition: all 0.4s ease;
+	transition: all 0.4s ease;
+
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+}
+
+.button:active {
+	outline: none;
+}
+
+.button:hover {
+	background: @button-color;
+	color: #fff;
 }
 
 .option2 {
@@ -191,12 +174,6 @@ input[type=checkbox] {
 
 
 /* trial animations */
-
-#testDiv {
-	width: 200px;
-	height: 100px;
-	background: @red;
-}
 
 .stretchRight{
 

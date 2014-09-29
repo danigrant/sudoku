@@ -102,9 +102,10 @@ $(document).ready(function(){
 		e.preventDefault();
 	});
 	
-	//when the validate toggle's value is changed, if it is now checked, validate the board
-	$('#toggle-validation').change(function() {
-		autoValidate = $(this).prop('checked');
+	//when the validate button is pressed, if it is now checked, validate the board
+	$('#valid').click(function () {
+		console.log(autoValidate);
+		autoValidate = !autoValidate;
 		if (autoValidate) validateBox();
 		else {
 			$('.valid').removeClass('valid');
@@ -165,20 +166,20 @@ $(document).ready(function(){
 		return $($('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]:not(:disabled)')[0]);
 	}
 
-	//event handlers for animations
-	$('#toggle').mouseenter(function() {
-		console.log("mouse enter toggle");
-		$('#toggle').addClass('floating');
-	}).mouseleave(function() {
-		$('#toggle').removeClass('floating');
-	});
+	// //event handlers for animations
+	// $('#toggle').mouseenter(function() {
+	// 	console.log("mouse enter toggle");
+	// 	$('#toggle').addClass('floating');
+	// }).mouseleave(function() {
+	// 	$('#toggle').removeClass('floating');
+	// });
 
-	$('#submit').mouseenter(function() {
-		console.log("mouse enter submit");
-		$('#submit').addClass('floating');
-	}).mouseleave(function() {
-		$('#submit').removeClass('floating');
-	});
+	// $('#submit').mouseenter(function() {
+	// 	console.log("mouse enter submit");
+	// 	$('#submit').addClass('floating');
+	// }).mouseleave(function() {
+	// 	$('#submit').removeClass('floating');
+	// });
 
 });
 
