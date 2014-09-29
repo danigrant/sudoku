@@ -1,6 +1,6 @@
 # Super user do ku.
 
-http://danigrant.github.io/sudoku/
+<a href="http://danigrant.github.io/sudoku/" target="_blank">http://danigrant.github.io/sudoku</a>
 
 ## The Stack
 Sudoku is built with LESS/CSS/JS/JQuery.
