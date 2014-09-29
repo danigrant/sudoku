@@ -21,7 +21,7 @@ function explode() {
 		//reverse the fade outs, bring everything back in
 
 		//fade out the congratulatory elems
-		$('.back').fadeTo(50, 0);
+		$('.back').fadeTo(25, 0);
 		$('.congrats').fadeTo(50, 0);
 
 		//fade in the board

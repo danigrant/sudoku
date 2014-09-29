@@ -160,6 +160,14 @@ $(document).ready(function(){
 		if (validGame) {
 			hooray();
 		}
+		else {
+			$('#submit').addClass('shake');
+		}
+		
+		//after half a second, remove the shake class
+		setTimeout(function(){
+			$('.shake').removeClass('shake');
+		}, 500);
 		return validGame;
 	}
 
@@ -241,8 +249,6 @@ function load(sudokuGame) {
 			if ((colIndex+1) == 1) {
 				$('.sudoku-box[data-row="'+(rowIndex+1)+'"][data-col="'+(colIndex+1)+'"]').addClass('border-left');
 			}
-
-
 
 		});
 		$('#board').append('<br />');

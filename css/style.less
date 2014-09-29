@@ -142,7 +142,7 @@ input[type=checkbox] {
 	width: 160px;
 	height: 70px;
 	background: transparent;
-	border: 2px solid @button-color;	
+	border: 2px solid @button-color;
 	outline: none;
 
 	-webkit-transition: all 0.4s ease;
@@ -230,6 +230,74 @@ input[type=checkbox] {
 	background: transparent;
 	border: none;
 }
+
+/* shake animation */
+
+.shake{
+	animation-name: shake;
+	-webkit-animation-name: shake;	
+
+	animation-duration: 0.4s;	
+	-webkit-animation-duration: 0.4s;
+
+	animation-timing-function: ease-in-out;	
+	-webkit-animation-timing-function: ease-in-out;
+
+	transform-origin: 50% 100%;
+	-ms-transform-origin: 50% 100%;
+	-webkit-transform-origin: 50% 100%; 
+
+	visibility: visible !important;		
+}
+
+@keyframes shake {
+	0% {
+		transform: rotate(0deg);
+	}
+	20% {
+		transform: rotate(-2deg);
+	}
+	35% {
+		transform: rotate(2deg);
+	}
+	50% {
+		transform: rotate(-2deg);
+	}	
+	65% {
+		transform: rotate(1deg);
+	}	
+	80% {
+		transform: rotate(-1deg);
+	}		
+	100% {
+		transform: rotate(0deg);
+	}									
+}
+
+@-webkit-keyframes shake {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
+	20% {
+		-webkit-transform: rotate(-2deg);
+	}
+	35% {
+		-webkit-transform: rotate(2deg);
+	}
+	50% {
+		-webkit-transform: rotate(-2deg);
+	}	
+	65% {
+		-webkit-transform: rotate(1deg);
+	}	
+	80% {
+		-webkit-transform: rotate(-1deg);
+	}		
+	100% {
+		-webkit-transform: rotate(0deg);
+	}		
+}
+
 
 @media (max-width: 800px) {
 	#board {
